@@ -1,0 +1,54 @@
+﻿<!-- Name - Manjinder Singh
+     Date - December 11, 2020
+     Course - NETD3202
+     Description - This is the html page that shows the comments on the website if any.
+-->
+@model IEnumerable<DiscussionForm.Models.Comment>
+
+@{
+    ViewData["Title"] = "ViewComments";
+}
+
+<h1>@ViewBag.TopicTitle</h1>
+<h2>@ViewBag.Description</h2>
+
+<h3>Comments</h3>
+
+<p>
+    <a asp-action="AddComment" asp-route-id="@ViewBag.TopicID">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Posted By
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostTime)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostTime)
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

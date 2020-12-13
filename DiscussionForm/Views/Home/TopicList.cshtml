@@ -1,0 +1,57 @@
+﻿<!-- Name - Manjinder Singh
+     Date - December 11, 2020
+     Course - NETD3202
+     Description - This is the html page that displays the topic list on the website.
+-->
+@model IEnumerable<DiscussionForm.Models.Topic>
+
+@{
+    ViewData["Title"] = "TopicList";
+}
+
+<h1>Topics </h1>
+
+<p>
+    <a asp-action="AddTopic">Start New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Posted By
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostTime)
+                </td>
+                <td>
+                    <a asp-action="ViewComments" asp-route-id="@item.TopicID">Comments</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

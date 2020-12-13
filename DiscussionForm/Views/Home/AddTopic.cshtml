@@ -1,0 +1,64 @@
+﻿<!-- Name - Manjinder Singh
+     Date - December 11, 2020
+     Course - NETD3202
+     Description - This is the html page that shows the form to add topic.
+-->
+@model DiscussionForm.Models.Topic
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+
+@{
+    ViewData["Title"] = "AddTopic";
+
+
+    List<SelectListItem> catnames = new List<SelectListItem>();
+    foreach (Category cat in ViewBag.CategoryID)
+    {
+        catnames.Add(new SelectListItem() { Text = cat.Name, Value = cat.CategoryID.ToString() });
+    }
+
+}
+
+<h1>AddTopic</h1>
+
+<h4>Topic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTopic">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" required />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryID" class="control-label"></label>
+                <select asp-for="CategoryID" asp-items="catnames">
+                </select>
+
+
+
+            </div>
+            <div class="form-group">
+                <label asp-for="PostedBy" class="control-label"></label>
+                <input asp-for="PostedBy" readonly value="@User.Identity.Name" class="form-control" required />
+                <span asp-validation-for="PostedBy" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

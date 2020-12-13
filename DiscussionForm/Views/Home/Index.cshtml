@@ -1,0 +1,24 @@
+﻿<!-- Name - Manjinder Singh
+     Date - December 11, 2020
+     Course - NETD3202
+     Description - This is the index page of the website.
+-->
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Discussion Forms, a place to raise your voice</h1>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <a asp-action="AddTopic" class="btn-success">Start New Topic</a>
+        <a asp-action="TopicList" class="btn-danger">Check current Topics</a>
+    }
+    else
+    {
+
+
+    }
+</div>
